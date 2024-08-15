@@ -159,6 +159,14 @@ input {
 	height: 40px;
 	width: 40px;
 }
+
+@media only screen and (min-width: 410px) and (max-width: 600px) {
+	.container{
+		width: 100%;
+		
+		
+	}
+}
 </style>
 </head>
 <body>
@@ -166,7 +174,7 @@ input {
 		<div class="form-container log-in-container">
 			<form action="{{url('admin/login')}}" method="GET">
                 @csrf
-				<h1>Login</h1>
+				<h1>Login </h1>
 				{{-- <div class="social-container"> --}}
 					<p>Login to continue</p>
 				{{-- </div> --}}

@@ -70,7 +70,13 @@ class PaymentsController extends Controller
         ->join('subjects','subjects.id','paymentstudents.subject_id')
         ->join('tutorregistrations','tutorregistrations.id','paymentstudents.tutor_id')
         ->join('statuses','statuses.id','paymentdetails.status')
-        ->paginate(10);
+        ->get();
+        // $payments = paymentstudents::select('*')
+        // ->join('paymentdetails','paymentdetails.transaction_id','paymentstudents.transaction_id')
+        // ->join('studentregistrations','studentregistrations.id','paymentstudents.student_id')
+        // ->join('tutorregistrations','tutorregistrations.id','paymentstudents.tutor_id')
+        // ->get();
+        // ->paginate(10);
         $totalTransactionAmount = $payments->sum('transaction_amount');
         $subjects = subjects::where('is_active',1)->get();
         $classes = classes::where('is_active',1)->get();

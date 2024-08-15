@@ -160,9 +160,9 @@
 
             </tbody>
         </table>
-            <div class="d-flex justify-content-center" id="paginationContainer">
+            {{-- <div class="d-flex justify-content-center" id="paginationContainer">
                 {!! $payments->links() !!}
-            </div>
+            </div> --}}
 
         <!-- content-wrapper ends -->
 

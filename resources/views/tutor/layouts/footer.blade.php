@@ -77,6 +77,7 @@
    
 
 <!-- JAVASCRIPT -->
+@vite(['resources/sass/app.scss', 'resources/js/app.js'])
 <script src="{{ url('new-styles/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ url('new-styles/assets/libs/simplebar/simplebar.min.js') }}"></script>
 <script src="{{ url('new-styles/assets/libs/node-waves/waves.min.js') }}"></script>
