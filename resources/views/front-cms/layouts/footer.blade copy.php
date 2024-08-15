@@ -1,167 +1,245 @@
-<!-- FOOTER START -->
-<footer>
-    {{-- <div class="tu-footer">
-        <div class="container">
-            <div class="tu-footer_maintitle">
-                <h5>Explore from our huge collection</h5>
-                <h3>Approach tutors near to your house</h3>
+<!-- Modal -->
+<div class="modal fade loginModel" id="loginPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content loginModel">
+            <div class="modal-header" style="border: none;">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="row tu-footer_row">
-                <div class="col-sm-6 col-md-4 col-lg-3">
-                    <h5 class="tu-footertitle">Tutors in Atlanta</h5>
-                    <ul class="tu-footerlist">
-                        <li><a href="search-listing.html">B.Tech IT</a></li>
-                        <li><a href="search-listing.html">B.Tech Chemical</a></li>
-                        <li><a href="search-listing.html">B.Tech Petroleum</a></li>
-                        <li><a href="search-listing.html">B.Tech Ceramic</a></li>
-                        <li><a href="search-listing.html">B.Tech Production</a></li>
-                        <li class="tu-footerlist-explore"><a href="search-listing.html">Explore all</a></li>
-                    </ul>
+            <h3 class="text-center">Login</h3>
+
+            <form class="loginForm" action="{{ url('/student-login') }}" method="GET">
+              @csrf
+                <div class="form-group">
+                    @if (Session::has('success'))
+                                <div class="alert alert-success">{{ Session::get('success') }}</div>
+                                <input type="hidden" id="showloginpopup" name="showloginpopup" value="0">
+                            @endif
+                            @if (Session::has('fail'))
+                            <input type="hidden" id="showloginpopup" name="showloginpopup" value="1">
+                                <div class="alert alert-danger">{{ Session::get('fail') }}</div>
+                            @endif
+                    <label for="number">Mobile Number</label>
+                    <input type="number" class="form-control" id="username" name="username" aria-describedby=""
+                        placeholder="Your Number" required>
                 </div>
-                <div class="col-sm-6 col-md-4 col-lg-3">
-                    <h5 class="tu-footertitle">Tutors in Atlanta</h5>
-                    <ul class="tu-footerlist">
-                        <li><a href="search-listing.html">B.Tech Robotics</a></li>
-                        <li><a href="search-listing.html">B.Tech Industrial</a></li>
-                        <li><a href="search-listing.html">B.Tech Biotech</a></li>
-                        <li><a href="search-listing.html">B.Tech Communications</a></li>
-                        <li><a href="search-listing.html">B.Tech Civil</a></li>
-                        <li class="tu-footerlist-explore"><a href="search-listing.html">Explore all</a></li>
-                    </ul>
+                <span class="text-danger  login-errorMessage">
+                    @error('username')
+                        {{ $message }}
+                    @enderror
+                </span>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" aria-describedby=""
+                        placeholder="Password" required>
                 </div>
-                <div class="col-sm-6 col-md-4 col-lg-3">
-                    <h5 class="tu-footertitle">Tutors in Tulsa</h5>
-                    <ul class="tu-footerlist">
-                        <li><a href="search-listing.html">B.Tech Ceramic</a></li>
-                        <li><a href="search-listing.html">B.Tech Mechatronics</a></li>
-                        <li><a href="search-listing.html">B.Tech Aerospace</a></li>
-                        <li><a href="search-listing.html">B.Tech Mechatronics</a></li>
-                        <li><a href="search-listing.html">B.Tech Power</a></li>
-                        <li class="tu-footerlist-explore"><a href="search-listing.html">Explore all</a></li>
-                    </ul>
+                <span class="text-danger login-errorMessage">
+                    @error('password')
+                        {{ $message }}
+                    @enderror
+                </span>
+                <p class="mt-3">Login as</p>
+
+                <div class="radioBtn">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="radioLogin student active-btn">
+                                <input type="radio" value="student" name="loginAs" id="student" checked>
+                                <span>Student</span>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="radioLogin tutor">
+                                <input type="radio" value="tutor" name="loginAs" id="tutor">
+                                <span>Tutor</span>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="radioLogin parents">
+                                <input type="radio" value="parents" name="loginAs" id="parents">
+                                <span>Parents</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="text-danger login-errorMessage">
+                        @error('loginAs')
+                            {{ $message }}
+                        @enderror
+                    </span>
                 </div>
-                <div class="col-sm-6 col-md-4 col-lg-3">
-                    <h5 class="tu-footertitle">Tutors in Oklahoma City</h5>
-                    <ul class="tu-footerlist">
-                        <li><a href="search-listing.html">B.Tech Ceramic</a></li>
-                        <li><a href="search-listing.html">B.Tech Aeronautical</a></li>
-                        <li><a href="search-listing.html">B.Tech Communications</a></li>
-                        <li><a href="search-listing.html">B.Tech Electrical</a></li>
-                        <li><a href="search-listing.html">Content writing</a></li>
-                        <li class="tu-footerlist-explore"><a href="search-listing.html">Explore all</a></li>
-                    </ul>
+
+                <hr>
+                <button type="submit" class="btn brand-bg-Color mb-3">Login</button>
+
+                <br>
+                <a href="#">
+                    <div class="googleLogin">
+
+                        <img src="{{ url('frontendnew/img/icons/google-logo.png') }}" alt=""><span>Sign in with
+                            Google</span>
+
+                    </div>
+
+                </a>
+
+                <div class="forgotPwd mt-3">
+                    <p> Don't have an account? <a href="{{ '/student/register' }}" class="register">Register</a></p>
+                    <a href="#">Forgot password?</a>
                 </div>
-                <div class="col-sm-6 col-md-4 col-lg-3">
-                    <h5 class="tu-footertitle">Tutors in Virginia Beach</h5>
-                    <ul class="tu-footerlist">
-                        <li><a href="search-listing.html">B.Tech Environmental</a></li>
-                        <li><a href="search-listing.html">B.Tech Mech</a></li>
-                        <li><a href="search-listing.html">B.Tech Robotics</a></li>
-                        <li><a href="search-listing.html">B.Tech Transportation</a></li>
-                        <li><a href="search-listing.html">B.Tech Marine</a></li>
-                        <li class="tu-footerlist-explore"><a href="search-listing.html">Explore all</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-3">
-                    <h5 class="tu-footertitle">Tutors in San Francisco</h5>
-                    <ul class="tu-footerlist">
-                        <li><a href="search-listing.html">B.Tech Marine</a></li>
-                        <li><a href="search-listing.html">B.Tech Environmental</a></li>
-                        <li><a href="search-listing.html">B.Tech Textile</a></li>
-                        <li><a href="search-listing.html">B.Tech ECE</a></li>
-                        <li><a href="search-listing.html">B.Tech CSE</a></li>
-                        <li class="tu-footerlist-explore"><a href="search-listing.html">Explore all</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-3">
-                    <h5 class="tu-footertitle">Tutors in Mesa</h5>
-                    <ul class="tu-footerlist">
-                        <li><a href="search-listing.html">B.Tech ECE</a></li>
-                        <li><a href="search-listing.html">B.Tech IT</a></li>
-                        <li><a href="search-listing.html">B.Tech Industrial</a></li>
-                        <li><a href="search-listing.html">B.Tech Aeronautical</a></li>
-                        <li><a href="search-listing.html">B.Tech CSE</a></li>
-                        <li class="tu-footerlist-explore"><a href="search-listing.html">Explore all</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-3">
-                    <h5 class="tu-footertitle">Tutors in Boston</h5>
-                    <ul class="tu-footerlist">
-                        <li><a href="search-listing.html">B.Tech Petroleum</a></li>
-                        <li><a href="search-listing.html">B.Tech Metallurgical</a></li>
-                        <li><a href="search-listing.html">B.Tech Mining</a></li>
-                        <li><a href="search-listing.html">B.Tech Power</a></li>
-                        <li><a href="search-listing.html">B.Tech Aerospace</a></li>
-                        <li class="tu-footerlist-explore"><a href="search-listing.html">Explore all</a></li>
-                    </ul>
-                </div>
-            </div>
+
+
+
+
+
+
+
+            </form>
         </div>
-    </div> --}}
-    <div class="tu-footerdark">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7">
-                    <strong class="tu-footerlogo">
-                        <a href="/"><img src="{{url('frontend/images/logo_white.png')}}" width="200px" alt="Logo"></a>
-                    </strong>
-                    <p class="tu-footerdescription">"My Choice Tutor" is your go-to online tuition app, dedicated to fostering seamless and effective learning experiences. Connect with qualified tutors, access personalized lessons, and enjoy the flexibility of learning from the comfort of your home. Elevate your education with a platform designed to meet your unique academic needs.</p>
-                    <ul class="tu-socialmedia">
-                        <li class="tu-facebookv3"><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                        <li class="tu-twitterv3"><a href="https://twitter.com/?lang=en" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                        <li class="tu-linkedinv3"><a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                        <li class="tu-dribbblev3"><a href="https://dribbble.com/"  target="_blank"><i class="fab fa-dribbble"></i></a></li>
-                        <li class="tu-twitchv3"><a href="https://www.twitch.tv/"  target="_blank"><i class="fab fa-twitch"></i></a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-5">
-                    <h5 class="tu-footertitle">Feel free to share your question</h5>
-                    <ul class="tu-footerlist tu-footericonlist">
-                        <li><a href="tel:+6287777263549"><i class="icon icon-phone-call"></i><em>+62 877 77263549</em><span>( Mon to Sun 9am - 11pm GMT )</span></a></li>
-                        <li><a href="mailto:hello@youremailid.co.uk"><i class="icon icon-mail"></i><em>hello@youremailid.co.uk</em></a></li>
-                        <li><a href="tel:+681109998263"><i class="icon icon-printer"></i><em>+62 811 09998263</em></a></li>
-                        <li><a href="tel:(+33)775559375"><i class="fab fa-whatsapp"></i><em>(+33)7 75 55 9375</em><span>( Mon to Sun 9am - 11pm GMT )</span></a></li>
-                    </ul>
-                </div>
-               
+    </div>
+</div>
+
+
+<script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const studentRadio = document.getElementById('student');
+                        const tutorRadio = document.getElementById('tutor');
+                        const parentsRadio = document.getElementById('parents');
+                        const studentDiv = document.querySelector('.student');
+                        const tutorDiv = document.querySelector('.tutor');
+                        const parentsDiv = document.querySelector('.parents');
+
+                        function switchActiveClass() {
+                            studentDiv.classList.remove('active-btn');
+                            tutorDiv.classList.remove('active-btn');
+                            parentsDiv.classList.remove('active-btn');
+
+                            if (studentRadio.checked) {
+                                studentDiv.classList.add('active-btn');
+                            } else if (tutorRadio.checked) {
+                                tutorDiv.classList.add('active-btn');
+                            } else if (parentsRadio.checked) {
+                                parentsDiv.classList.add('active-btn');
+                            }
+                        }
+
+                        studentRadio.addEventListener('change', switchActiveClass);
+                        tutorRadio.addEventListener('change', switchActiveClass);
+                        parentsRadio.addEventListener('change', switchActiveClass);
+                    });
+                </script>
+
+
+
+<script>
+    $('#myModal').on('shown.bs.modal', function() {
+        $('#myInput').trigger('focus')
+    })
+</script>
+<script>
+    $(document).ready(function(){
+        if(document.getElementById('showloginpopup').value == 1){
+
+            $("#loginPopup").modal('show');
+        }
+    });
+    </script>
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." class="float" target="_blank">
+<i class="fa fa-whatsapp my-float"></i>
+</a>
+
+<div class="chatboat">
+    <img src="{{ url('frontendnew/img/icons/chatboat.png') }}" alt="">
+</div>
+
+
+
+
+
+<footer class="footerArea mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <h5 class="mb-4">Quick Links</h5>
+                <ul>
+                    <a href="/aboutus"><li>About us</li></a>
+                    <a href="/aboutus"><li>Who we are</li></a>
+                    <a href="/findatutor"><li>Find Tutor</li></a>
+                    <a href="/subjects"><li>Subjects</li></a>
+                    <a href="/aboutus"><li>Contact Us</li></a>
+                    <a href="#"><li>Privacy Policy</li></a>
+                    <a href="#"><li>Terms and Conditions</li></a>
+
+                </ul>
             </div>
-        </div>
-        <div class="tu-footercopyright">
-            <div class="container">
-                <div class="tu-footercopyright_content">
-                    <p>© 1994 - 2022 All Rights Reserved.</p>
-                    <ul class="tu-footercopyright_list">
-                        <li><a href="how-it-work.html">Careers</a></li>
-                        <li><a href="how-it-work.html">Terms of use</a></li>
-                        <li><a href="how-it-work.html">Privacy policy</a></li>
-                        <li><a href="how-it-work.html">Cookie notice</a></li>
-                    </ul>
+
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <h5 class="mb-4">Popular Subjects</h5>
+                <ul>
+                    <li>Psychology</li>
+                    <li>Biology</li>
+                    <li>Business Studies</li>
+                    <li>Chemistry</li>
+                    <li>Computer Science</li>
+                    <li>English Language</li>
+                    <li>French</li>
+                    <li>German</li>
+                    <li>History</li>
+                    <li>Mathematics</li>
+                    <li>Physics</li>
+                </ul>
+            </div>
+
+
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <h5 class="mb-4">Follow us</h5>
+                <ul class="contactDetail">
+                    <li><img src="{{ url('frontendnew/img/icons/Group.png') }}" alt="">07761 975326</li>
+                    <li><img src="{{ url('frontendnew/img/icons/Vector.png') }}" alt="">07761 975326</li>
+                    <li><img src="{{ url('frontendnew/img/icons/email.png') }}" alt="">info@mychoicetutor.com
+                    </li>
+
+                </ul>
+
+                <div class="social">
+                    <a href="#"><img src="{{ url('frontendnew/img/icons/facebook.png') }}" alt=""></a>
+                    <a href="#"><img src="{{ url('frontendnew/img/icons/OUTLINE_copy_2.png') }}"
+                            alt=""></a>
+                    <a href="#"><img src="{{ url('frontendnew/img/icons/Group 797.png') }}" alt=""></a>
+
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <h5 class="mt-4">Help</h5>
+                <ul>
+                    <li>Help Center</li>
+                    <li>Contact Us</li>
+                </ul>
+
+                <div class="social">
+                    <img src="{{ url('frontendnew/img/footer-logo.png') }}" width="160px" alt="">
                 </div>
             </div>
         </div>
     </div>
+    <div class="footer-bottom">
+        <p>Copyright © 2024 MyChoiceTutor. All rights reserved.</p>
+    </div>
 </footer>
-<!-- FOOTER END -->
-<!-- Custom Tooltip Render Here -->
-<div class="tu-tippysm">
-    <span id="tu-verifed" class="d-none">
-        <span class="tu-tippytooltip">
-            <span>Verified</span>
-        </span>
-    </span>
-</div>
-<!-- Custom Tooltip Render Here -->
-<script src="{{url('frontend/js/vendor/jquery.min.js')}}"></script>	
-<script src="{{url('frontend/js/vendor/popper-core.js')}}"></script>
-<script src="{{url('frontend/js/vendor/bootstrap.min.js')}}"></script>
-<script src="{{url('frontend/js/vendor/appear.js')}}"></script>
-<script src="{{url('frontend/js/vendor/countTo.js')}}"></script>
-<script src="{{url('frontend/js/vendor/splide.min.js')}}"></script>
-<script src="{{url('frontend/js/vendor/select2.min.js')}}"></script>
-<script src="{{url('frontend/js/vendor/typed.min.js')}}"></script>
-<script src="{{url('frontend/js/vendor/tippy.js')}}"></script>
-<script src="{{url('frontend/js/vendor/main.js')}}"></script>
 
+<script src="{{ url('frontendnew/js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url('frontendnew/js/popper.min.js') }}"></script>
+<script src="{{ url('frontendnew/js/bootstrap.min.js') }}"></script>
+<script src="{{ url('frontendnew/js/jquery.sticky.js') }}"></script>
+<script src="{{ url('frontendnew/js/main.js') }}"></script>
 </body>
 
 </html>
